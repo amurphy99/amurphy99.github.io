@@ -1,0 +1,74 @@
+{% include base_path %}
+
+{% if post.header.teaser %}
+  {% capture teaser %}{{ post.header.teaser }}{% endcapture %}
+{% elsif post.teaser %}
+  {% capture teaser %}{{ post.teaser }}{% endcapture %}
+{% else %}
+  {% assign teaser = site.teaser %}
+{% endif %}
+
+
+<div class="grid__item">
+  <article class="research-card">
+    
+    {% if teaser %}
+      <div class="research-card-image-wrapper">
+        <img src="{{ teaser | relative_url }}" alt="" class="research-card-image">
+      </div>
+    {% endif %}
+
+    <div class="research-card-content">
+      
+      <div class="research-card-type">
+        {% if post.collection == 'publications' %}
+          <i class="far fa-file-alt"></i> Paper
+        {% elsif post.collection == 'talks' %}
+          <i class="fas fa-microphone-alt"></i> Talk
+        {% elsif post.collection == 'portfolio' %}
+          <i class="fas fa-laptop-code"></i> Project
+        {% else %}
+          <i class="far fa-calendar"></i> {{ post.date | date: "%Y" }}
+        {% endif %}
+      </div>
+
+      <h3 class="research-card-title"> <a href="{{ post.url | relative_url }}" rel="permalink">{{ post.title }}</a> </h3>
+
+      <p class="research-card-text">
+        {{ post.excerpt | markdownify | strip_html | truncate: 120 }}
+      </p>
+
+      <div class="research-card-actions">
+
+        {% if post.code %}
+          <a href="{{ post.code }}" class="btn-sm"><i class="fab fa-github"></i> Code</a>
+        {% endif %}
+        
+        {% if post.slidesurl %}
+          <a href="{{ post.slidesurl }}" class="btn-sm"><i class="fas fa-chalkboard-teacher"></i> Slides</a>
+        {% endif %}
+        
+        <a href="{{ post.url | relative_url }}" class="btn-sm">Read More</a>
+        
+      </div>
+
+      <!-- 
+      <div class="research-card-actions">
+        {% if post.paperurl %}
+          <a href="{{ post.paperurl }}" class="btn-sm"><i class="fas fa-file-pdf"></i> PDF</a>
+        {% endif %}
+        {% if post.code %}
+          <a href="{{ post.code }}" class="btn-sm"><i class="fab fa-github"></i> Code</a>
+        {% endif %}
+        {% if post.slidesurl %}
+          <a href="{{ post.slidesurl }}" class="btn-sm"><i class="fas fa-chalkboard-teacher"></i> Slides</a>
+        {% endif %}
+        {% unless post.paperurl or post.code %}
+           <a href="{{ post.url | relative_url }}" class="btn-sm">Read More</a>
+        {% endunless %}
+      </div>
+      -->
+
+    </div>
+  </article>
+</div>
