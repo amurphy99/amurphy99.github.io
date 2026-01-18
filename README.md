@@ -4,4 +4,3 @@ Forked from [academicpages.github.io](https://github.com/academicpages/academicp
 
 # ToDo:
 * Make the teaser images work / show up on the pages
-* Add the link to the demo page
